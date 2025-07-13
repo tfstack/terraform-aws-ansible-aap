@@ -1,0 +1,16 @@
+# AWS Configuration
+aws_region = "ap-southeast-2"
+
+# AAP Installer Package
+# Download from Red Hat Customer Portal: https://access.redhat.com/
+# Required: ansible-automation-platform-setup-bundle-*.tar.gz
+aap_installer_path = "/path/to/ansible-automation-platform-setup-bundle-2.4-5-x86_64.tar.gz"
+
+# Optional: EC2 Key Pair for SSH access
+# If not provided, use SSM Session Manager for access
+key_pair_name = "my-ec2-keypair"
+
+# Example with different configuration for production:
+# aws_region = "us-west-2"
+# aap_installer_path = "/opt/software/aap-2.4-bundle.tar.gz"
+# key_pair_name = "production-keypair"
