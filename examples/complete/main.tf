@@ -24,18 +24,22 @@ module "ansible_aap" {
   enable_dns_hostnames = true
   enable_dns_support   = true
 
-  # Jumphost Configuration
-  create_security_group            = true
-  ami_type                         = "amazonlinux2"
-  instance_type                    = "t3.micro"
-  assign_eip                       = false
-  enable_instance_connect          = true
-  enable_instance_connect_endpoint = true
+  # EC2 Configuration
+  instance_type = "m6a.large"
 
-  user_data_extra = <<-EOT
-    apt-get update -y
-    apt-get install -y mtr netcat
-  EOT
+
+  # # Jumphost Configuration
+  # create_security_group            = true
+  # ami_type                         = "amazonlinux2"
+
+  # assign_eip                       = false
+  # enable_instance_connect          = true
+  # enable_instance_connect_endpoint = true
+
+  # user_data_extra = <<-EOT
+  #   apt-get update -y
+  #   apt-get install -y mtr netcat
+  # EOT
 
   # RDS Configuration
   db_instance_class          = "db.t3.micro"
@@ -49,6 +53,9 @@ module "ansible_aap" {
   allowed_cidr_blocks                  = ["10.0.0.0/16", "${data.http.my_public_ip.response_body}/32"]
   allowed_ssh_cidr_blocks              = ["10.0.0.0/16"]
   allowed_instance_connect_cidr_blocks = ["10.0.0.0/16", "${data.http.my_public_ip.response_body}/32"]
+
+  redhat_org            = "15916054"
+  redhat_activation_key = "rhel-subscription"
 
   # Monitoring and Logging
   enable_cloudwatch_dashboard = true

@@ -64,47 +64,59 @@ variable "availability_zones" {
   }
 }
 
-# Jumphost variables
+# # Jumphost variables
 
-variable "ami_type" {
-  description = "Logical AMI type to use. Allowed: amazonlinux2, amazonlinux2023, ubuntu."
+# variable "ami_type" {
+#   description = "Logical AMI type to use. Allowed: amazonlinux2, amazonlinux2023, ubuntu."
+#   type        = string
+#   default     = "amazonlinux2"
+#   validation {
+#     condition     = contains(["amazonlinux2", "amazonlinux2023", "ubuntu"], lower(var.ami_type))
+#     error_message = "ami_type must be one of: amazonlinux2, amazonlinux2023, ubuntu."
+#   }
+# }
+
+# variable "create_security_group" {
+#   description = "Create a dedicated security group allowing SSH/ICMP from allowed CIDRs if no security group IDs are supplied. If true, vpc_security_group_ids can be empty."
+#   type        = bool
+#   default     = false
+# }
+
+# variable "assign_eip" {
+#   description = "Whether to allocate and associate an Elastic IP (valid only when subnet is public)."
+#   type        = bool
+#   default     = true
+# }
+
+# variable "enable_instance_connect" {
+#   description = "Install and enable EC2 Instance Connect for SSH (Amazon Linux & Ubuntu only)."
+#   type        = bool
+#   default     = false
+# }
+
+variable "redhat_org" {
+  description = "Red Hat organization ID for subscription registration"
   type        = string
-  default     = "amazonlinux2"
-  validation {
-    condition     = contains(["amazonlinux2", "amazonlinux2023", "ubuntu"], lower(var.ami_type))
-    error_message = "ami_type must be one of: amazonlinux2, amazonlinux2023, ubuntu."
-  }
+  default     = ""
 }
 
-variable "create_security_group" {
-  description = "Create a dedicated security group allowing SSH/ICMP from allowed CIDRs if no security group IDs are supplied. If true, vpc_security_group_ids can be empty."
-  type        = bool
-  default     = false
+variable "redhat_activation_key" {
+  description = "Red Hat activation key for subscription registration"
+  type        = string
+  default     = ""
 }
 
-variable "assign_eip" {
-  description = "Whether to allocate and associate an Elastic IP (valid only when subnet is public)."
+variable "enable_ssm" {
+  description = "Enable AWS SSM Agent installation on AAP controller"
   type        = bool
   default     = true
 }
 
-variable "enable_instance_connect" {
-  description = "Install and enable EC2 Instance Connect for SSH (Amazon Linux & Ubuntu only)."
-  type        = bool
-  default     = false
-}
-
-variable "enable_instance_connect_endpoint" {
-  description = "Create an EC2 Instance Connect Endpoint for private subnet access (requires VPC endpoints or NAT)."
-  type        = bool
-  default     = false
-}
-
-variable "user_data_extra" {
-  description = "Additional user_data shell commands appended to the module's base user_data."
-  type        = string
-  default     = ""
-}
+# variable "user_data_extra" {
+#   description = "Additional user_data shell commands appended to the module's base user_data."
+#   type        = string
+#   default     = ""
+# }
 
 # AAP Package handling variables
 variable "aap_package_mode" {

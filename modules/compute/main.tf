@@ -46,16 +46,19 @@ locals {
   ami_id = var.ami_id != null ? var.ami_id : data.aws_ami.redhat_linux[0].id
 
   user_data = templatefile("${path.module}/templates/user_data.sh.tpl", {
-    aap_admin_secret_arn = var.aap_admin_secret_arn
-    db_secret_arn        = var.db_password_secret_arn
-    db_endpoint          = var.db_endpoint
-    db_name              = var.db_name
-    s3_bucket            = var.s3_bucket_name
-    s3_key               = var.s3_object_key
-    region               = data.aws_region.current.region
-    cloudwatch_log_group = var.cloudwatch_log_group_name
-    aap_admin_username   = var.aap_admin_username
-    aap_organization     = var.aap_organization
+    aap_admin_secret_arn  = var.aap_admin_secret_arn
+    db_secret_arn         = var.db_password_secret_arn
+    db_endpoint           = var.db_endpoint
+    db_name               = var.db_name
+    s3_bucket             = var.s3_bucket_name
+    s3_key                = var.s3_object_key
+    region                = data.aws_region.current.region
+    cloudwatch_log_group  = var.cloudwatch_log_group_name
+    aap_admin_username    = var.aap_admin_username
+    aap_organization      = var.aap_organization
+    redhat_org            = var.redhat_org
+    redhat_activation_key = var.redhat_activation_key
+    enable_ssm            = var.enable_ssm
   })
 }
 

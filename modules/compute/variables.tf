@@ -94,3 +94,23 @@ variable "aap_organization" {
   description = "AAP organization name"
   type        = string
 }
+
+# Red Hat Subscription
+variable "redhat_org" {
+  description = "Red Hat organization ID for subscription registration"
+  type        = string
+  default     = ""
+}
+
+variable "redhat_activation_key" {
+  description = "Red Hat activation key for subscription registration"
+  type        = string
+  default     = ""
+}
+
+# SSM Configuration
+variable "enable_ssm" {
+  description = "Enable AWS SSM Agent installation"
+  type        = bool
+  default     = true
+}
